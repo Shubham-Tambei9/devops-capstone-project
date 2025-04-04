@@ -1,11 +1,58 @@
-**As a** [role]  
-**I need** [function]  
-**So that** [benefit]  
+**As a** Final year Information Technology student working on the 'Efficient Water Management' project
+**I need** to build a real-time, voice-controlled irrigation system using IoT (ESP8266) and Firebase integration 
+**So that** farmers can automate irrigation, receive real-time soil data, and reduce water wastage through a user-friendly Android app
       
 ### Details and Assumptions
-    * [document what you know]      
+    * Microcontroller: ESP8266 NodeMCU
+
+Sensors:
+
+Soil Moisture Sensor (capacitive or resistive type)
+
+DHT11/DHT22 for temperature and humidity
+
+Actuator: Relay Module to control water pump
+
+Power Supply: 5V regulated supply (power bank or adapter)
+
+Connectivity: Wi-Fi (ESP8266 connects to Firebase via internet)
+
+Backend: Firebase Realtime Database
+
+Mobile App: Developed in Android Studio, includes:
+
+Firebase Authentication (Google Sign-In)
+
+Realtime data monitoring
+
+Voice control using Google Speech Recognition API
+
+Manual and auto irrigation modes
+
+Cloud Functions (Optional): Firebase Functions for notification triggers
+
+Thresholds: Predefined soil moisture values (e.g., below 30% → needs watering)   
+
 ### Acceptance Criteria     
     gherkin 
-    Given [some context]
-    When [certain action is taken]
-    Then [the outcome of action is observed]
+    Feature: Smart Irrigation Monitoring System
+
+Scenario: Real-time soil monitoring and irrigation alert
+Given the ESP8266 is powered and connected to Wi-Fi
+And soil moisture is below 30%
+When data is uploaded to Firebase
+Then the app should notify the user with an irrigation alert
+
+Scenario: Voice-based irrigation control
+Given the user opens the Android app
+And says the voice command "Start irrigation"
+When the voice is processed using Google Speech API
+Then Firebase sends a signal to the ESP8266 to activate the relay module
+And the water pump is turned on
+
+Scenario: Auto-stop irrigation when soil moisture is sufficient
+Given the water pump is ON
+When the soil moisture sensor detects a level above 60%
+Then the ESP8266 should deactivate the relay
+And the app should display "Irrigation Complete" message
+
